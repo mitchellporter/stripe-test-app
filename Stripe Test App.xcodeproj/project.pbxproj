@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		C30A01C21B10323000BECD23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A01C11B10323000BECD23 /* main.m */; };
 		C30A01C51B10323000BECD23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A01C41B10323000BECD23 /* AppDelegate.m */; };
-		C30A01C81B10323000BECD23 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A01C71B10323000BECD23 /* ViewController.m */; };
 		C30A01CB1B10323000BECD23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30A01C91B10323000BECD23 /* Main.storyboard */; };
 		C30A01CD1B10323000BECD23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C30A01CC1B10323000BECD23 /* Images.xcassets */; };
-		C30A01D01B10323000BECD23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30A01CE1B10323000BECD23 /* LaunchScreen.xib */; };
 		C30A01DC1B10323000BECD23 /* Stripe_Test_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A01DB1B10323000BECD23 /* Stripe_Test_AppTests.m */; };
+		C30A01E81B1033B500BECD23 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A01E61B1033B500BECD23 /* LaunchController.m */; };
+		C30A01E91B1033B500BECD23 /* LaunchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30A01E71B1033B500BECD23 /* LaunchController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +32,14 @@
 		C30A01C11B10323000BECD23 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C30A01C31B10323000BECD23 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C30A01C41B10323000BECD23 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C30A01C61B10323000BECD23 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C30A01C71B10323000BECD23 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C30A01CA1B10323000BECD23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C30A01CC1B10323000BECD23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		C30A01CF1B10323000BECD23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C30A01D51B10323000BECD23 /* Stripe Test AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Stripe Test AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30A01DA1B10323000BECD23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C30A01DB1B10323000BECD23 /* Stripe_Test_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Stripe_Test_AppTests.m; sourceTree = "<group>"; };
+		C30A01E51B1033B500BECD23 /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchController.h; sourceTree = "<group>"; };
+		C30A01E61B1033B500BECD23 /* LaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchController.m; sourceTree = "<group>"; };
+		C30A01E71B1033B500BECD23 /* LaunchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +83,12 @@
 			children = (
 				C30A01C31B10323000BECD23 /* AppDelegate.h */,
 				C30A01C41B10323000BECD23 /* AppDelegate.m */,
-				C30A01C61B10323000BECD23 /* ViewController.h */,
-				C30A01C71B10323000BECD23 /* ViewController.m */,
 				C30A01C91B10323000BECD23 /* Main.storyboard */,
 				C30A01CC1B10323000BECD23 /* Images.xcassets */,
-				C30A01CE1B10323000BECD23 /* LaunchScreen.xib */,
 				C30A01BF1B10323000BECD23 /* Supporting Files */,
+				C30A01E51B1033B500BECD23 /* LaunchController.h */,
+				C30A01E61B1033B500BECD23 /* LaunchController.m */,
+				C30A01E71B1033B500BECD23 /* LaunchController.xib */,
 			);
 			path = "Stripe Test App";
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C30A01CB1B10323000BECD23 /* Main.storyboard in Resources */,
-				C30A01D01B10323000BECD23 /* LaunchScreen.xib in Resources */,
+				C30A01E91B1033B500BECD23 /* LaunchController.xib in Resources */,
 				C30A01CD1B10323000BECD23 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,7 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C30A01C81B10323000BECD23 /* ViewController.m in Sources */,
+				C30A01E81B1033B500BECD23 /* LaunchController.m in Sources */,
 				C30A01C51B10323000BECD23 /* AppDelegate.m in Sources */,
 				C30A01C21B10323000BECD23 /* main.m in Sources */,
 			);
@@ -250,14 +250,6 @@
 				C30A01CA1B10323000BECD23 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C30A01CE1B10323000BECD23 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C30A01CF1B10323000BECD23 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

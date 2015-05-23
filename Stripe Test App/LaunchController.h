@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LaunchController.h
 //  Stripe Test App
 //
 //  Created by Mitchell Porter on 5/22/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface LaunchController : UIViewController
 
 @end
-
