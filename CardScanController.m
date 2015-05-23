@@ -9,9 +9,10 @@
 #import "CardScanController.h"
 #import <Stripe/Stripe.h>
 
-static NSString *stripeKey = @"sk_test_mUZyJO28o0UNCdZY7jPMuHN1";
+static NSString *testSecretKey = @"sk_test_mUZyJO28o0UNCdZY7jPMuHN1";
+static NSString *testPublishableKey = @"pk_test_Hw6EKSIAY4mw5XfiywNs0KiB";
 
-@interface CardScanController () <CardIOPaymentViewControllerDelegate>
+@interface CardScanController () <CardIOPaymentViewControllerDelegate, STPBackendCharging>
 
 // CardIO
 @property NSString *cardNumber;
@@ -20,8 +21,6 @@ static NSString *stripeKey = @"sk_test_mUZyJO28o0UNCdZY7jPMuHN1";
 @property NSString *cvv;
 
 // Stripe
-@property (nonatomic, weak) id<STPBackendCharging> backendCharger;
-
 
 @end
 
@@ -50,26 +49,6 @@ static NSString *stripeKey = @"sk_test_mUZyJO28o0UNCdZY7jPMuHN1";
 
 - (IBAction)chargeCard:(id)sender
 {
-    STPCard *card = [[STPCard alloc] init];
-    card.number = self.cardNumber;
-    card.expMonth = self.expiryMonth;
-    card.expYear = self.expiryYear;
-    card.cvc = self.cvv;
-    
-    [[STPAPIClient sharedClient] createTokenWithCard:card
-                                          completion:^(STPToken *token, NSError *error) {
-                                              
-     if (error) {
-        // Handle error
-     }
-                                              
-      [self.backendCharger createBackendChargeWithToken:token completion:^(STPBackendChargeResult result, NSError *error) {
-            if (error) {
-                return;
-             }
-          
-    }];
-    }];
 }
 
 #pragma mark - Delegate methods
@@ -92,7 +71,63 @@ static NSString *stripeKey = @"sk_test_mUZyJO28o0UNCdZY7jPMuHN1";
     self.expiryYear = info.expiryYear;
     self.cvv = info.cvv;
     
-    [scanViewController dismissViewControllerAnimated:YES completion:nil];
+    [scanViewController dismissViewControllerAnimated:YES completion:^{
+        // Create stripe token
+        [self createStripeToken];
+        
+    }];
+}
+
+# pragma mark - Stripe
+
+- (void)createStripeToken
+{
+    STPCard *card = [[STPCard alloc] init];
+    card.number = self.cardNumber;
+    card.expMonth = self.expiryMonth;
+    card.expYear = self.expiryYear;
+    card.cvc = self.cvv;
+    
+    STPAPIClient *client = [[STPAPIClient alloc] initWithPublishableKey:testPublishableKey];
+    [client createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
+        
+        if (error) {
+            // Handle error
+        } else {
+            
+            [self createBackendChargeWithToken:token completion:^(STPBackendChargeResult status, NSError * __nullable error) {
+                //
+            }];
+        }
+        
+    }];
+}
+
+
+- (void)createBackendChargeWithToken:(STPToken *)token completion:(STPTokenSubmissionHandler)completion {
+    NSDictionary *chargeParams = @{ @"stripeToken": token.tokenId, @"amount": @"1000" };
+    
+//    if (!BackendChargeURLString) {
+        NSError *error = [NSError
+                          errorWithDomain:StripeDomain
+                          code:STPInvalidRequestError
+                          userInfo:@{
+                                     NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Good news! Stripe turned your credit card into a token: %@ \nYou can follow the "
+                                                                 @"instructions in the README to set up an example backend, or use this "
+                                                                 @"token to manually create charges at dashboard.stripe.com .",
+                                                                 token.tokenId]
+                                     }];
+        completion(STPBackendChargeResultFailure, error);
+        return;
+//    }
+    
+    // This passes the token off to our payment backend, which will then actually complete charging the card using your Stripe account's secret key
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    [manager POST:[BackendChargeURLString stringByAppendingString:@"/charge"]
+//       parameters:chargeParams
+//          success:^(AFHTTPRequestOperation *operation, id responseObject) { completion(STPBackendChargeResultSuccess, nil); }
+//          failure:^(AFHTTPRequestOperation *operation, NSError *error) { completion(STPBackendChargeResultFailure, error); }];
 }
 
 @end
