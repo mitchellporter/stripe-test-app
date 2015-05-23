@@ -21,7 +21,6 @@ static NSString *herokuURL = @"https://stripe-ios-backend.herokuapp.com/";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
 }
 
 - (IBAction)simpleGet:(id)sender
