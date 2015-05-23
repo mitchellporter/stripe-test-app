@@ -34,9 +34,7 @@ static NSString *herokuURL = @"https://stripe-ios-backend.herokuapp.com/";
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
     
-    
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
 }
 
 @end
