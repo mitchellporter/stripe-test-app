@@ -8,6 +8,10 @@
 
 #import "LaunchController.h"
 
+#pragma mark - Heroku URL
+
+static NSString *herokuURL = @"https://stripe-ios-backend.herokuapp.com/";
+
 @interface LaunchController ()
 
 @end
@@ -18,6 +22,22 @@
 {
     [super viewDidLoad];
 
+}
+
+- (IBAction)simpleGet:(id)sender
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:herokuURL]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod: @"GET"];
+    
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
 }
 
 @end
