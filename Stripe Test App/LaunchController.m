@@ -7,6 +7,7 @@
 //
 
 #import "LaunchController.h"
+#import "CardScanController.h"
 
 #pragma mark - Heroku URL
 
@@ -35,6 +36,12 @@ static NSString *herokuURL = @"https://stripe-ios-backend.herokuapp.com/";
     NSURLResponse *urlResponse = nil;
     
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+}
+
+- (IBAction)scanCard:(id)sender
+{
+    CardScanController *cardScan = [[CardScanController alloc] initWithNibName:@"CardScanController" bundle:nil];
+    [self presentViewController:cardScan animated:YES completion:nil];
 }
 
 @end
