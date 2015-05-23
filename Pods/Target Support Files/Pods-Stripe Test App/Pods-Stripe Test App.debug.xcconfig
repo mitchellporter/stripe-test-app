@@ -1,7 +1,7 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CardIO" "${PODS_ROOT}/Headers/Public/Stripe"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/CardIO" "${PODS_ROOT}/Headers/Public/Stripe"
 LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/CardIO/CardIO"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/CardIO" -isystem "${PODS_ROOT}/Headers/Public/Stripe"
-OTHER_LDFLAGS = -ObjC -l"CardIO" -l"Pods-Stripe Test App-CardIO" -l"Pods-Stripe Test App-Stripe" -l"c++" -framework "AVFoundation" -framework "AudioToolbox" -framework "CoreMedia" -framework "CoreVideo" -framework "Foundation" -framework "MobileCoreServices" -framework "OpenGLES" -framework "QuartzCore" -framework "Security" -framework "UIKit"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/CardIO" -isystem "${PODS_ROOT}/Headers/Public/Stripe"
+OTHER_LDFLAGS = -ObjC -l"CardIO" -l"Pods-Stripe Test App-AFNetworking" -l"Pods-Stripe Test App-CardIO" -l"Pods-Stripe Test App-Stripe" -l"c++" -framework "AVFoundation" -framework "AudioToolbox" -framework "CoreGraphics" -framework "CoreMedia" -framework "CoreVideo" -framework "Foundation" -framework "MobileCoreServices" -framework "OpenGLES" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods
