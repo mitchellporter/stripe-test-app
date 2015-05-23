@@ -8,9 +8,13 @@
 
 #import "CardScanController.h"
 #import <Stripe/Stripe.h>
+#import <AFNetworking/AFNetworking.h>
 
 static NSString *testSecretKey = @"sk_test_mUZyJO28o0UNCdZY7jPMuHN1";
 static NSString *testPublishableKey = @"pk_test_Hw6EKSIAY4mw5XfiywNs0KiB";
+static NSString *herokuURL = @"https://stripe-ios-backend.herokuapp.com";
+static NSString *mastercardDebitTestCard = @"5200828282828210";
+
 
 @interface CardScanController () <CardIOPaymentViewControllerDelegate, STPBackendCharging>
 
@@ -83,7 +87,8 @@ static NSString *testPublishableKey = @"pk_test_Hw6EKSIAY4mw5XfiywNs0KiB";
 - (void)createStripeToken
 {
     STPCard *card = [[STPCard alloc] init];
-    card.number = self.cardNumber;
+//    card.number = self.cardNumber;
+    card.number = mastercardDebitTestCard;
     card.expMonth = self.expiryMonth;
     card.expYear = self.expiryYear;
     card.cvc = self.cvv;
@@ -107,7 +112,7 @@ static NSString *testPublishableKey = @"pk_test_Hw6EKSIAY4mw5XfiywNs0KiB";
 - (void)createBackendChargeWithToken:(STPToken *)token completion:(STPTokenSubmissionHandler)completion {
     NSDictionary *chargeParams = @{ @"stripeToken": token.tokenId, @"amount": @"1000" };
     
-//    if (!BackendChargeURLString) {
+    if (!herokuURL) {
         NSError *error = [NSError
                           errorWithDomain:StripeDomain
                           code:STPInvalidRequestError
@@ -119,15 +124,22 @@ static NSString *testPublishableKey = @"pk_test_Hw6EKSIAY4mw5XfiywNs0KiB";
                                      }];
         completion(STPBackendChargeResultFailure, error);
         return;
-//    }
+    }
     
     // This passes the token off to our payment backend, which will then actually complete charging the card using your Stripe account's secret key
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-//    [manager POST:[BackendChargeURLString stringByAppendingString:@"/charge"]
-//       parameters:chargeParams
-//          success:^(AFHTTPRequestOperation *operation, id responseObject) { completion(STPBackendChargeResultSuccess, nil); }
-//          failure:^(AFHTTPRequestOperation *operation, NSError *error) { completion(STPBackendChargeResultFailure, error); }];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:[herokuURL stringByAppendingString:@"/charge"]
+       parameters:chargeParams
+          success:^(AFHTTPRequestOperation *operation, id responseObject) { completion(STPBackendChargeResultSuccess, nil);
+          
+          
+          }
+     
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) { completion(STPBackendChargeResultFailure, error);
+          
+          
+          }];
 }
 
 @end
