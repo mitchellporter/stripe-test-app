@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <CardIO/CardIO.h>
+#import <Stripe/Stripe.h>
+
+@protocol STPBackendCharging <NSObject>
+
+- (void)createBackendChargeWithToken:(STPToken *)token completion:(STPTokenSubmissionHandler)completion;
+
+@end
 
 @interface CardScanController : UIViewController
+
+
 
 @end

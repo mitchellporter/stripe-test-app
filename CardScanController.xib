@@ -23,6 +23,15 @@
                         <action selector="scanCard:" destination="-1" eventType="touchUpInside" id="IKS-Ma-q50"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmU-0L-ECh">
+                    <rect key="frame" x="115" y="257" width="91" height="30"/>
+                    <state key="normal" title="Charge card">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="chargeCard:" destination="-1" eventType="touchUpInside" id="zHC-b5-1lz"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
