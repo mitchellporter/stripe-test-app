@@ -35,6 +35,8 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self createManagedConnectAccount];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -94,6 +96,7 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
     card.cvc = self.cvv;
     
     STPAPIClient *client = [[STPAPIClient alloc] initWithPublishableKey:testPublishableKey];
+    
     [client createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
         
         if (error) {
@@ -133,13 +136,30 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
        parameters:chargeParams
           success:^(AFHTTPRequestOperation *operation, id responseObject) { completion(STPBackendChargeResultSuccess, nil);
           
-          
           }
      
           failure:^(AFHTTPRequestOperation *operation, NSError *error) { completion(STPBackendChargeResultFailure, error);
           
           
           }];
+}
+
+- (void)createManagedConnectAccount
+{
+    NSDictionary *chargeParams = @{@"country": @"US", @"managed": @"true"};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:[testSecretKey stringByAppendingString:@":"] password:@""];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:[NSString stringWithFormat:@"https://api.stripe.com/v1/accounts"]
+       parameters:chargeParams
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+          }
+     
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              
+              }];
 }
 
 @end
