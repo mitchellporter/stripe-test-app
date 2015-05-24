@@ -36,7 +36,8 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
 {
     [super viewDidLoad];
     
-    [self createManagedConnectAccount];
+    
+    [self createRecipient];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -55,6 +56,7 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
 
 - (IBAction)chargeCard:(id)sender
 {
+    
 }
 
 #pragma mark - Delegate methods
@@ -159,7 +161,29 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
      
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               
-              }];
+       }];
+}
+
+- (void)createRecipient
+{
+    // Testing - hardcoded
+    self.expiryMonth = 04;
+    self.expiryYear = 18;
+    
+    NSDictionary *chargeParams = @{@"name": @"Mitchell Porter", @"type": @"individual", @"card": @{@"number": mastercardDebitTestCard, @"exp_month": [NSString stringWithFormat:@"%lu", self.expiryMonth], @"exp_year": [NSString stringWithFormat:@"%lu", self.expiryYear]}};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:[testSecretKey stringByAppendingString:@":"] password:@""];
+    manager.responseSerializer = [ResponseSerializer serializer];
+    [manager POST:[NSString stringWithFormat:@"https://api.stripe.com/v1/recipients"]
+       parameters:chargeParams
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+          }
+     
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              
+          }];
 }
 
 @end
