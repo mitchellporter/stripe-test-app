@@ -16,6 +16,7 @@
 		C30A01E91B1033B500BECD23 /* LaunchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30A01E71B1033B500BECD23 /* LaunchController.xib */; };
 		C30A01F31B103B5B00BECD23 /* CardScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = C30A01F11B103B5B00BECD23 /* CardScanController.m */; };
 		C30A01F41B103B5B00BECD23 /* CardScanController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30A01F21B103B5B00BECD23 /* CardScanController.xib */; };
+		C3CBFFD21B114CED002256EF /* ResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CBFFD11B114CED002256EF /* ResponseSerializer.m */; };
 		D2DD6A9B3525AC28EA88F76B /* libPods-Stripe Test App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA156275B07F693EB0F52BA9 /* libPods-Stripe Test App.a */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,8 @@
 		C30A01F01B103B5B00BECD23 /* CardScanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardScanController.h; path = ../CardScanController.h; sourceTree = "<group>"; };
 		C30A01F11B103B5B00BECD23 /* CardScanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardScanController.m; path = ../CardScanController.m; sourceTree = "<group>"; };
 		C30A01F21B103B5B00BECD23 /* CardScanController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardScanController.xib; path = ../CardScanController.xib; sourceTree = "<group>"; };
+		C3CBFFD01B114CED002256EF /* ResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseSerializer.h; sourceTree = "<group>"; };
+		C3CBFFD11B114CED002256EF /* ResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseSerializer.m; sourceTree = "<group>"; };
 		DA156275B07F693EB0F52BA9 /* libPods-Stripe Test App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Stripe Test App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBB7B65FA9F024F411B6A516 /* Pods-Stripe Test App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stripe Test App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stripe Test App/Pods-Stripe Test App.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +124,8 @@
 				C30A01F01B103B5B00BECD23 /* CardScanController.h */,
 				C30A01F11B103B5B00BECD23 /* CardScanController.m */,
 				C30A01F21B103B5B00BECD23 /* CardScanController.xib */,
+				C3CBFFD01B114CED002256EF /* ResponseSerializer.h */,
+				C3CBFFD11B114CED002256EF /* ResponseSerializer.m */,
 			);
 			path = "Stripe Test App";
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3CBFFD21B114CED002256EF /* ResponseSerializer.m in Sources */,
 				C30A01E81B1033B500BECD23 /* LaunchController.m in Sources */,
 				C30A01C51B10323000BECD23 /* AppDelegate.m in Sources */,
 				C30A01F31B103B5B00BECD23 /* CardScanController.m in Sources */,

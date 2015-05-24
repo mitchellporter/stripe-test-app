@@ -7,6 +7,7 @@
 //
 
 #import "CardScanController.h"
+#import "ResponseSerializer.h"
 #import <Stripe/Stripe.h>
 #import <AFNetworking/AFNetworking.h>
 
@@ -14,7 +15,6 @@ static NSString *testSecretKey = @"sk_test_mUZyJO28o0UNCdZY7jPMuHN1";
 static NSString *testPublishableKey = @"pk_test_Hw6EKSIAY4mw5XfiywNs0KiB";
 static NSString *herokuURL = @"https://stripe-ios-backend.herokuapp.com";
 static NSString *mastercardDebitTestCard = @"5200828282828210";
-
 
 @interface CardScanController () <CardIOPaymentViewControllerDelegate, STPBackendCharging>
 
@@ -150,7 +150,7 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:[testSecretKey stringByAppendingString:@":"] password:@""];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = [ResponseSerializer serializer];
     [manager POST:[NSString stringWithFormat:@"https://api.stripe.com/v1/accounts"]
        parameters:chargeParams
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
