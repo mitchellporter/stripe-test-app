@@ -15,6 +15,7 @@ static NSString *testSecretKey = @"sk_test_mUZyJO28o0UNCdZY7jPMuHN1";
 static NSString *testPublishableKey = @"pk_test_Hw6EKSIAY4mw5XfiywNs0KiB";
 static NSString *herokuURL = @"https://stripe-ios-backend.herokuapp.com";
 static NSString *mastercardDebitTestCard = @"5200828282828210";
+static NSString *testCardForFundingBalance = @"4000000000000077";
 
 @interface CardScanController () <CardIOPaymentViewControllerDelegate, STPBackendCharging>
 
@@ -36,8 +37,11 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
 {
     [super viewDidLoad];
     
+    // Testing - hardcoded
+    self.expiryMonth = 05;
+    self.expiryYear = 18;
     
-    [self createRecipient];
+    [self sendMoneyToRecipient];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -90,9 +94,10 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
 
 - (void)createStripeToken
 {
+    
     STPCard *card = [[STPCard alloc] init];
 //    card.number = self.cardNumber;
-    card.number = mastercardDebitTestCard;
+    card.number = testCardForFundingBalance;
     card.expMonth = self.expiryMonth;
     card.expYear = self.expiryYear;
     card.cvc = self.cvv;
@@ -115,7 +120,7 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
 
 
 - (void)createBackendChargeWithToken:(STPToken *)token completion:(STPTokenSubmissionHandler)completion {
-    NSDictionary *chargeParams = @{ @"stripeToken": token.tokenId, @"amount": @"1000" };
+    NSDictionary *chargeParams = @{ @"stripeToken": token.tokenId, @"amount": @"100000" };
     
     if (!herokuURL) {
         NSError *error = [NSError
@@ -166,10 +171,6 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
 
 - (void)createRecipient
 {
-    // Testing - hardcoded
-    self.expiryMonth = 04;
-    self.expiryYear = 18;
-    
     NSDictionary *chargeParams = @{@"name": @"Mitchell Porter", @"type": @"individual", @"card": @{@"number": mastercardDebitTestCard, @"exp_month": [NSString stringWithFormat:@"%lu", self.expiryMonth], @"exp_year": [NSString stringWithFormat:@"%lu", self.expiryYear]}};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -182,8 +183,26 @@ static NSString *mastercardDebitTestCard = @"5200828282828210";
           }
      
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }];
+}
+
+- (void)sendMoneyToRecipient
+{
+    NSDictionary *chargeParams = @{@"amount": @"100", @"currency": @"usd", @"recipient": @"rp_165n7XHEbknzaldoavpKZCDM", @"card": @"card_165n7XHEbknzaldoKfnlDn5M", @"description": @"test transfer to debit card", @"statement_descriptor": @"test transfer"};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setAuthorizationHeaderFieldWithUsername:[testSecretKey stringByAppendingString:@":"] password:@""];
+    manager.responseSerializer = [ResponseSerializer serializer];
+    [manager POST:[NSString stringWithFormat:@"https://api.stripe.com/v1/transfers"]
+       parameters:chargeParams
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
-          }];
+              NSLog(@"Error: %@", [[responseObject objectForKey:@"error"] objectForKey:@"message"]);
+          }
+     
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              
+    }];
 }
 
 @end
