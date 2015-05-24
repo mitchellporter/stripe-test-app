@@ -147,7 +147,6 @@ static NSString *testCardForFundingBalance = @"4000000000000077";
      
           failure:^(AFHTTPRequestOperation *operation, NSError *error) { completion(STPBackendChargeResultFailure, error);
           
-          
           }];
 }
 
